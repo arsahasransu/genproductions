@@ -516,7 +516,8 @@ for num in range(0,len(prepid)):
         # Ultra-legacy sample settings' compatibility
         pi_prime = "NULL"
         prime_tmp = []
-        if "Summer20UL18" in pi or "Summer20UL17" in pi or "Summer20UL16wmLHEGENAPV" in pi or "Summer20UL16GENAPV" in pi or "Summer20UL16" in pi and "GEN" in pi and "pLHE" not in pi:
+#        if "Summer20UL18" in pi or "Summer20UL17" in pi or "Summer20UL16wmLHEGENAPV" in pi or "Summer20UL16GENAPV" in pi or "Summer20UL16" in pi and "GEN" in pi and "pLHE" not in pi:
+        if "Summer20UL18" in pi or "Summer20UL17" in pi or "Summer20UL16wmLHEGENAPV" in pi or "Summer20UL16GENAPV" in pi or "Summer20UL16" in pi and "GEN" in pi:
             prime = get_requests_from_datasetname(dn)
             if len(prime) == 0:
                 print "* [ERROR] No corresponing Summer20UL16 request to compare to for consistency."
@@ -526,7 +527,8 @@ for num in range(0,len(prepid)):
 		print "Related requests:"
                 for rr in prime:
                     print(rr['prepid'],rr['extension'],ext)
-                    if "Summer20UL16" in rr['prepid'] and "GEN" in rr['prepid'] and ext == rr['extension'] and "APV" not in rr['prepid'] and ("Summer20UL18" in pi or "Summer20UL17" in pi or "Summer20UL16wmLHEGENAPV" in pi or "Summer20UL16GENAPV" in pi):
+#                    if "Summer20UL16" in rr['prepid'] and "GEN" in rr['prepid'] and ext == rr['extension'] and "APV" not in rr['prepid'] and ("Summer20UL18" in pi or "Summer20UL17" in pi or "Summer20UL16wmLHEGENAPV" in pi or "Summer20UL16GENAPV" in pi):
+                    if "Summer20UL16" in rr['prepid'] and "GEN" in rr['prepid'] and "APV" not in rr['prepid'] and ("Summer20UL18" in pi or "Summer20UL17" in pi or "Summer20UL16wmLHEGENAPV" in pi or "Summer20UL16GENAPV" in pi):
                         pi_prime = rr['prepid']
                         cmssw_prime = rr['cmssw_release']
                     if "Summer20UL16" in pi and "APV" not in pi and "GEN" in rr['prepid'] and ext == rr['extension'] and "Summer19UL17" in rr['prepid']:
@@ -912,7 +914,11 @@ for num in range(0,len(prepid)):
                     matching_c = int(re.search(r'\d+',ickkw_c).group())
                     maxjetflavor = os.popen('more '+filename_rc+' | tr -s \' \' | grep "= maxjetflavor"').read()
                     print(ickkw_c, matching_c, maxjetflavor)
-                    maxjetflavor = int(re.search(r'\d+',maxjetflavor).group())
+                    if len(maxjetflavor) != 0:
+                        maxjetflavor = int(re.search(r'\d+',maxjetflavor).group())
+                    else:
+                        print"* [WARNING] maxjetflavor not defined in run_card.dat"
+                        warning += 1
                     print "maxjetflavor = "+str(maxjetflavor)
                     if matching_c == 3 and pythia8_flag != 0:
                         ps_hw = os.popen('grep parton_shower '+filename_rc).read()
@@ -1492,7 +1498,7 @@ for num in range(0,len(prepid)):
                 if 'Summer20UL' not in pi and 'Summer19UL' not in pi and 'Fall18' not in pi and 'Fall17' not in pi and 'Run3' not in pi:
                     print "* [WARNING] Do you really want to have tune "+tune[0] +" in this campaign?"
                     warning += 1
-        if 'Fall18' in pi and 'UL' in pi and fsize != 0 and herwig_flag == 0:
+        if fsize != 0 and herwig_flag == 0:
             if int(os.popen('grep -c "from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *" '+pi).read()) != 1 :
                 print "* [WARNING] No parton shower weights configuration in the fragment. In the Fall18 campaign, we recommend to include Parton Shower weights"
                 warning += 1
