@@ -167,6 +167,8 @@ if [ -f ./madspin_card.dat ] ;then
     fi
 fi
 
+./madevent/bin/madevent add_time_of_flight events.lhe
+
 cd $LHEWORKDIR
 
 runlabel=GridRun_PostProc_${rnum}

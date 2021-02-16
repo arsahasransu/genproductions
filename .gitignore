@@ -1,2 +1,7 @@
 *.pyc
 __init__.py
+bin/MadGraph5_aMCatNLO/--help.log
+bin/MadGraph5_aMCatNLO/SingletTripletHiggsDM_cards/
+bin/MadGraph5_aMCatNLO/Singlet_Triplet_Higgs_portal_DM.log
+bin/MadGraph5_aMCatNLO/Singlet_Triplet_Higgs_portal_DM/
+bin/MadGraph5_aMCatNLO/gridpacksTesDir/

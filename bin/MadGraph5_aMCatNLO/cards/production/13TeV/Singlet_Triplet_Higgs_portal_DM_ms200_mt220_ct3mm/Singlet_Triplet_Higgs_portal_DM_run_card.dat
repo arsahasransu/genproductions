@@ -55,7 +55,7 @@
  91.1880  = scale            ! fixed ren scale
  91.1880  = dsqrt_q2fact1    ! fixed fact scale for pdf1
  91.1880  = dsqrt_q2fact2    ! fixed fact scale for pdf2
- -1 = dynamic_scale_choice ! Choose one of the preselected dynamical choice
+ -1 = dynamical_scale_choice ! Choose one of the preselected dynamical choice
  1.0        = scalefact        ! scale factor for event-by-event scales
 #*********************************************************************
 # Matching - Warning! ickkw > 1 is still beta
